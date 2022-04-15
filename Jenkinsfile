@@ -19,7 +19,18 @@ pipeline {
                 success {
 					// pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'target/pmd.xml', unHealthy: ''
                     //publishIssues issues: [pmd]
-					scanForIssues tool: pmd(pattern: '**/target/pmd.xml')
+					//scanForIssues tool: pmd(pattern: '**/target/pmd.xml')
+					recordIssues(
+						aggregatingResults: true, enabledForFailure: true, ignoreQualityGate: true, sourceCodeEncoding: 'UTF-8', sourceDirectory: 'src/main/java',
+						tools: [
+						//checkStyle(pattern: 'target/checkstyle-result.xml', reportEncoding: 'UTF-8'),
+						//mavenConsole(),
+						//java(),
+						//cpd(pattern: 'target/cpd.xml', reportEncoding: 'UTF-8'),
+						pmdParser(pattern: 'target/pmd.xml', reportEncoding: 'UTF-8'),
+						//spotBugs(pattern: 'target/spotbugsXml.xml', reportEncoding: 'UTF-8', useRankAsPriority: true)
+            ]
+        )
                 }
             }
         }
