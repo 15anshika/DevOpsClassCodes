@@ -13,12 +13,12 @@ pipeline {
 
         stage ('CodeReview') {
             steps {
-                sh 'mvn -Pmetrics pmd:pmd' 
+                sh 'mvn -P metrics pmd:pmd' 
             }
             post {
                 success {
-					pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'target/pmd.xml', unHealthy: ''
-                    
+					// pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'target/pmd.xml', unHealthy: ''
+                    publishIssues([])
                 }
             }
         }
