@@ -18,7 +18,8 @@ pipeline {
             post {
                 success {
 					// pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'target/pmd.xml', unHealthy: ''
-                    publishIssues issues: [pmd]
+                    //publishIssues issues: [pmd]
+					scanForIssues tool: pmd(pattern: '**/target/pmd.xml')
                 }
             }
         }
